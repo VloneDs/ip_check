@@ -12,26 +12,15 @@
 
 ip = input('Введите IP: ')
 ip_split = ip.split('.') # получваем айпи
-if len(ip_split) > 4 or len(ip_split) < 4: # проверяем что айпи состоит из 4 элементов
+if len(ip_split) != 4: # проверяем что айпи состоит из 4 элементов
     print('error')
+elif all(map(lambda x: True if x.isdigit() else False, ip_split )):# прикольная функция которая возвращает True если все символы это цифры
+    res = all(map(lambda x: True if int(x) <= 155 and int(x) >= 0 else False, ip_split)) # проверяет все цифры на лимит
 else:
-    num = 0
-    range = 0
-    for i in ip_split:
-        if i.isdigit(): # прикольная функция которая возвращает True если все символы это цифры
-            num += 1 
-            if num == 4:
-                for no_ABC in ip_split:
-                    res = all(map(lambda no_ABC: True if int(no_ABC) <= 155 and int(no_ABC) >= 0 
-                              else False, ip_split)) # проверяет все цифры на лимит
-                if res:
-                    pass
-                else:
-                    range += 1
-    if range == 0 and num == 4:
-        print(f'{ip} -> True')
-    else:
-        print(f'{ip} -> False')
+    res = False
 
-
+if res:
+    print(f'{ip} -> True')
+else:
+    print(f'{ip} -> False')
 
